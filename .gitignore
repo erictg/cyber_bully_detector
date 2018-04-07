@@ -239,3 +239,4 @@ fabric.properties
 /pkg/
 /src/bitcamp/vendor/
 /app/bitcamp_app/node_modules/
+/src/github.com/
