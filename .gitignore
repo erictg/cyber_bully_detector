@@ -238,3 +238,4 @@ fabric.properties
 .idea/workspace.xml
 /pkg/
 /src/bitcamp/vendor/
+/app/bitcamp_app/node_modules/
