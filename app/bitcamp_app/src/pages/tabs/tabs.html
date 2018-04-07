@@ -4,7 +4,12 @@
   <ion-tab [root]="tab3Root" tabTitle="Contact" tabIcon="contacts"></ion-tab>
 </ion-tabs>
 <ion-content *ngIf="!auth.isLoggedIn">
-  <ion-input  placeholder="Username" [value]="username"></ion-input>
+  <ion-input  placeholder="Username" [(ngModel)]="username"></ion-input>
   <button  ion-button (click)="auth.login(username)">LOGIN</button>
+  <ion-item>
+    <ion-label>Are you a parent?</ion-label>
+    <ion-checkbox [(ngModel)]="parent"></ion-checkbox>
+  </ion-item>
 
+  <button ion-button (click)="createUser()">Create New Account</button>
 </ion-content>

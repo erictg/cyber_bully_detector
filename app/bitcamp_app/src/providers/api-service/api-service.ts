@@ -17,8 +17,8 @@ export class ApiServiceProvider {
 
   baseUrl = "http://35.196.78.183:8080";
 
-  getUser(username:string) : Observable<User>{
-    return this.http.get<User>(this.baseUrl + "/rest/user/name/" + username)
+  getUser(username:string) : Observable<Object>{
+    return this.http.get(this.baseUrl + "/rest/user/name/" + username)
   }
 
   getUserById(id:number) :Observable<User>{
@@ -30,7 +30,7 @@ export class ApiServiceProvider {
   createUser(username:string, isParent:boolean) : Observable<Object>{
     let dto = {
       "name":username,
-      "is_parent":username
+      "is_parent":isParent
     };
     return this.http.post(this.baseUrl + "/rest/user", dto);
   }

@@ -23,6 +23,7 @@ services:
     restart: always
     environment:
       DOCKER: 'true'
+      MYSQL_HOST: 'db'
     depends_on:
       - rabbitmq
       - db

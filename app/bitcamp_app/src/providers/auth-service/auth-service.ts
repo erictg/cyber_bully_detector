@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {StorageServiceProvider} from "../storage-service/storage-service";
 import {ApiServiceProvider, User} from "../api-service/api-service";
+import {HttpErrorResponse} from "@angular/common/http";
 
 /*
   Generated class for the AuthServiceProvider provider.
@@ -30,13 +31,19 @@ export class AuthServiceProvider {
   // e.g. the auth token
   login(username:string) : void {
     this.api.getUser(username).subscribe(user=>{
-      if(user == null){
-        this.isLoggedIn = false;
+      console.log("in callback");
+      if(typeof (user) == typeof (HttpErrorResponse)){
+        console.log('in typeif');
+        if((user as HttpErrorResponse).status != 200){
+          console.log("in check");
+          this.isLoggedIn = false;
+        }
       }else{
-        this.user = user;
+        this.user = user as User;
+        this.isLoggedIn = true;
       }
     });
-    this.isLoggedIn = true;
+
   }
 
   // Logout a user, destroy token and remove
