@@ -1,4 +1,4 @@
-version: 3.1
+version: '3.1'
 services:
   db:
     build: db/.
@@ -13,4 +13,26 @@ services:
   rabbitmq:
       image: rabbitmq
       ports:
-        - 5672
+        - "5672:5672"
+  api:
+    build:
+      context: "src/bitcamp"
+      dockerfile: "api.dockerfile"
+    ports:
+      - "8080:8080"
+    restart: always
+    environment:
+      DOCKER: 'true'
+    depends_on:
+      - rabbitmq
+      - db
+  worker:
+    build:
+      context: "src/bitcamp"
+      dockerfile: "worker.dockerfile"
+    restart: always
+    environment:
+      DOCKER: 'true'
+    depends_on:
+      - rabbitmq
+      - db

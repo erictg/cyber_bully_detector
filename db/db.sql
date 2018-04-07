@@ -21,5 +21,6 @@ create table flagged_text(
   confidence float,
   sent bool,
   user_id int,
+  other_number varchar(50),
   constraint foreign key (user_id) references user(id) on delete set null
 );

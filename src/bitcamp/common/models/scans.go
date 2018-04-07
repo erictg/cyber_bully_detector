@@ -44,6 +44,7 @@ func ScanFlaggedText(r *sql.Row) (FlaggedText, error) {
 		&s.Confidence,
 		&s.Sent,
 		&s.UserId,
+		&s.OtherNumber,
 	); err != nil {
 		return FlaggedText{}, err
 	}
@@ -61,6 +62,7 @@ func ScanFlaggedTexts(rs *sql.Rows) ([]FlaggedText, error) {
 			&s.Confidence,
 			&s.Sent,
 			&s.UserId,
+			&s.OtherNumber,
 		); err != nil {
 			return nil, err
 		}

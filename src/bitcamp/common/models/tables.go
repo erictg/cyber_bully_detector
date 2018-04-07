@@ -11,5 +11,6 @@ type FlaggedText struct{
 	Content    string  `json:"content"`
 	Confidence float32 `json:"score"`
 	Sent       bool    `json:"sent"`
-	UserId     bool    `json:"user_id"`
+	UserId     int    `json:"user_id"`
+	OtherNumber string `json:"other_number"`
 }

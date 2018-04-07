@@ -7,9 +7,9 @@ import(
 	"bitcamp/common/models"
 )
 
-func InsertFlaggedText(content string, confidence float32, sent bool, userId int) error{
-	query := sq.Insert("flagged_text").Columns("content", "confidence", "sent", "userId").
-		Values(content, confidence, sent, userId)
+func InsertFlaggedText(content string, confidence float32, sent bool, userId int, othernum string) error{
+	query := sq.Insert("flagged_text").Columns("content", "confidence", "sent", "userId", "other_number").
+		Values(content, confidence, sent, userId, othernum)
 	db, err := GetDB()
 	if err != nil {
 		log.Println(err)

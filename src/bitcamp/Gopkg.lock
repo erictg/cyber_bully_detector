@@ -60,6 +60,12 @@
   version = "v0.0.3"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/streadway/amqp"
+  packages = ["."]
+  revision = "8e4aba63da9fc5571e01c6a45dc809a58cbc5a68"
+
+[[projects]]
   name = "github.com/ugorji/go"
   packages = ["codec"]
   revision = "9831f2c3ac1068a78f50999a30db84270f647af6"
@@ -86,6 +92,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "f61c885fa9c74f14ce5098e35fad4cf1f8bdd9eb660d1a85f08fe819b40000a6"
+  inputs-digest = "bef140f490ecbca4b4b7e25e4f7e002c5062ac03f3a68cfde3718d0ca0f384af"
   solver-name = "gps-cdcl"
   solver-version = 1
