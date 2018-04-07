@@ -23,7 +23,11 @@ services:
     restart: always
     environment:
       DOCKER: 'true'
-      MYSQL_HOST: 'db'
+      MYSQL_ROOT_PASSWORD: mypassword
+      MYSQL_USER: dbuser
+      MYSQL_PASSWORD: userpass
+      MYSQL_DATABASE: bully
+
     depends_on:
       - rabbitmq
       - db
