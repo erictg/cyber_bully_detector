@@ -6,4 +6,5 @@
 <ion-content *ngIf="!auth.isLoggedIn">
   <ion-input  placeholder="Username" [value]="username"></ion-input>
   <button  ion-button (click)="auth.login(username)">LOGIN</button>
+
 </ion-content>

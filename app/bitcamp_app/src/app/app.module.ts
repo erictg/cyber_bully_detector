@@ -12,8 +12,11 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 
-
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
+import { ApiServiceProvider } from '../providers/api-service/api-service';
+import { IonicStorageModule } from '@ionic/storage';
+import { StorageServiceProvider } from '../providers/storage-service/storage-service';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,9 @@ import { AndroidPermissions } from '@ionic-native/android-permissions';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -40,7 +45,10 @@ import { AndroidPermissions } from '@ionic-native/android-permissions';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthServiceProvider
+    AuthServiceProvider,
+    ApiServiceProvider,
+    StorageServiceProvider,
+    HttpClientModule
   ]
 })
 export class AppModule {}

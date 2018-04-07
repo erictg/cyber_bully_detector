@@ -22,7 +22,7 @@ func main(){
 	var origins []string
 	if gin.IsDebugging(){
 		domain = ":8080"
-		origins = []string{"http://localhost:4200", "https://localhost", "http://192.168.0.111:4200"}
+		origins = []string{"http://localhost:8100", "https://localhost", "http://192.168.0.111:4200"}
 	}else{
 		domain = ":8080"
 		origins = []string{"https://eip.umbc.edu"}
