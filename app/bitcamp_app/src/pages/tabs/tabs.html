@@ -1,5 +1,9 @@
-<ion-tabs>
+<ion-tabs *ngIf="auth.isLoggedIn">
   <ion-tab [root]="tab1Root" tabTitle="Home" tabIcon="home"></ion-tab>
   <ion-tab [root]="tab2Root" tabTitle="About" tabIcon="information-circle"></ion-tab>
   <ion-tab [root]="tab3Root" tabTitle="Contact" tabIcon="contacts"></ion-tab>
 </ion-tabs>
+<ion-content *ngIf="!auth.isLoggedIn">
+  <ion-input  placeholder="Username" [value]="username"></ion-input>
+  <button  ion-button (click)="auth.login(username)">LOGIN</button>
+</ion-content>
