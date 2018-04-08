@@ -37,7 +37,7 @@ func GetDB() (*sql.DB, error){
 
 
 
-		connectionString := fmt.Sprintf("%s:%s@tcp(%s:3306)/psych?parseTime=true", uname, pwd, host)
+		connectionString := fmt.Sprintf("%s:%s@tcp(%s:3306)/bully?parseTime=true", uname, pwd, host)
 
 		log.Println(connectionString)
 
