@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {NavController, Platform} from 'ionic-angular';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
+//import {SmsServiceProvider} from "../../providers/sms-service/sms-service";
 
 declare var SMS:any;
 
@@ -10,11 +11,24 @@ declare var SMS:any;
 })
 export class HomePage {
 
-  messages:any=[];
+  messages:any=[ {address: "GOOD", body: "DOG"}];
 
   constructor(public navCtrl: NavController, public platform:Platform,
-              public androidPermissions: AndroidPermissions) {
+              public androidPermissions: AndroidPermissions,
+             /* private sms: SmsServiceProvider */  ) {
 
+  }
+
+
+  getSMS(){
+    if(SMS) SMS.listSMS({}, data=>{
+      setTimeout(()=>{
+        console.log(data);
+        this.messages=data;
+      },0)
+    },err=>{
+      console.log(err);
+    });
   }
 
   checkPermission()
