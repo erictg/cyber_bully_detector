@@ -18,17 +18,8 @@ func main(){
 
 	r := gin.Default()
 
-	var domain string
-	var origins []string
-	if gin.IsDebugging(){
-		domain = ":8080"
-		origins = []string{"http://localhost:8100", "https://localhost", "http://192.168.0.111:4200"}
-	}else{
-		domain = ":8080"
-		origins = []string{"https://eip.umbc.edu"}
-	}
 	r.Use(cors.New(cors.Config{
-		AllowOrigins:     origins,
+		AllowAllOrigins:	true,
 		AllowMethods:     []string{"PUT", "PATCH", "DELETE", "GET", "POST"},
 		AllowHeaders:     []string{"Origin", "Authorization", "Content-Type"},
 		ExposeHeaders:    []string{"Content-Length"},
@@ -42,6 +33,7 @@ func main(){
 	r.GET("/rest/user/id/:id", rest.GetUserById)
 	r.GET("/rest/user/name/:name", rest.GetUserByName)
 	r.POST("/rest/pair", rest.UserPairPOST)
-
-	r.Run(domain)
+	r.POST("rest/text/id/:id", rest.GetTextById)
+	r.POST("/rest/text/uid/:id", rest.GetAllTextsForUser)
+	r.Run(":8080")
 }

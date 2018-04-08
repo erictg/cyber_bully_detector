@@ -9,11 +9,12 @@ import {ApiServiceProvider, Result} from "../../providers/api-service/api-servic
 })
 export class AboutPage {
 
-  toShow:Result;
+  toShow:Result = new Result();
 
-  checkVal:string;
+  checkVal:string= '';
   constructor(public navCtrl: NavController, public auth:AuthServiceProvider, private api: ApiServiceProvider) {
-
+    this.toShow.not_insult = 0;
+    this.toShow.insult = 0;
   }
 
   check(){

@@ -86,6 +86,9 @@ export class ApiServiceProvider {
     return this.http.post<Result>("http://35.196.78.183:4200/rest/classify", dto)
   }
 
+  getTextsForUser(id) : Observable<TextContainer>{
+    return this.http.get<TextContainer>(this.baseUrl + "/rest/text/uid/" + id);
+  }
 }
 
 // Id 			int 	`json:"id"`
@@ -99,6 +102,19 @@ export class User{
 }
 
 export class Result {
-  insult: string;
-  not_insult: string;
+  insult: number;
+  not_insult: number;
+}
+
+export class TextContainer{
+  texts:Text[];
+}
+
+export class Text{
+  id:number;
+  content:string;
+  score:number;
+  sent:boolean;
+  user_id:number;
+  other_number:string;
 }
