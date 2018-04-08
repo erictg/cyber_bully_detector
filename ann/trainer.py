@@ -2,17 +2,15 @@ import itertools
 
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
-from keras import utils
-from keras.layers import Dense, Activation, Dropout
+from keras.layers import Dense, Dropout, Activation
 from keras.models import Sequential
-from keras.preprocessing import text
 from sklearn.metrics import confusion_matrix
-from sklearn.preprocessing import LabelEncoder
-
 
 # This utility function is from the sklearn docs:
 # http://scikit-learn.org/stable/auto_examples/model_selection/plot_confusion_matrix.html
+from model_util import tokenize_input, load_dataset, split_dataset, encode_labels, interactive_prompt, init_data
+
+
 def plot_confusion_matrix(cm, classes, title='Confusion matrix', cmap=plt.cm.Blues):
     """
     This function prints and plots the confusion matrix.
@@ -38,38 +36,7 @@ def plot_confusion_matrix(cm, classes, title='Confusion matrix', cmap=plt.cm.Blu
     plt.xlabel('Predicted label', fontsize=25)
 
 
-def load_dataset(filename):
-    return pd.read_csv(filename)
-
-
-def split_dataset(dataset, split, input_field, label_field, ):
-    train_size = int(len(dataset) * split)
-    return dataset[input_field][:train_size], dataset[input_field][train_size:], \
-           dataset[label_field][:train_size], dataset[label_field][train_size:]
-
-
-def tokenize_input(train, test, vocab):
-    # tokenize input text
-    tokenize = text.Tokenizer(num_words=vocab)
-    tokenize.fit_on_texts(train)
-    # create input matrix
-    return tokenize.texts_to_matrix(train),\
-           tokenize.texts_to_matrix(test),\
-           tokenize
-
-
-def encode_labels(train, test):
-    encoder = LabelEncoder()
-    encoder.fit(train)
-    y_train = encoder.transform(train)
-    num_classes = np.max(y_train) + 1
-    return utils.to_categorical(y_train, num_classes),\
-           utils.to_categorical(encoder.transform(test), num_classes),\
-           encoder.classes_, num_classes
-
-
 def create_model(vocab_size, num_classes):
-    # Build the model
     model = Sequential()
     model.add(Dense(512, input_shape=(vocab_size,)))
     model.add(Activation('relu'))
@@ -81,14 +48,21 @@ def create_model(vocab_size, num_classes):
                   optimizer='adam',
                   metrics=['accuracy'])
 
-    # create the model
     # embedding_vecor_length = 32
     # model = Sequential()
-    # model.add(Embedding(top_words, embedding_vecor_length, input_length=max_review_length))
-    # model.add(Dropout(0.2))
+    # model.add(Embedding(vocab_size, embedding_vecor_length))
     # model.add(LSTM(100))
-    # model.add(Dropout(0.2))
-    # model.add(Dense(1, activation='sigmoid'))
+    # model.add(Dropout(.2))
+    # model.add(Dense(512, input_shape=(vocab_size,)))
+    # model.add(Dense(2, activation='sigmoid'))
+    # model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+    # model = Sequential()
+    # model.add(Dense(60, input_shape=(vocab_size,), kernel_initializer='normal', activation='relu'))
+    # model.add(Dense(30, kernel_initializer='normal', activation='relu'))
+    # model.add(Dropout(.5))
+    # model.add(Dense(2, kernel_initializer='normal', activation='sigmoid'))
+    # # Compile model
     # model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
     print(model.summary())
@@ -96,16 +70,14 @@ def create_model(vocab_size, num_classes):
 
 
 def main():
-    data_split = .8
     vocab_size = 5000
 
-    data = load_dataset("train.csv")
-    train_input, test_input, train_label, test_label = split_dataset(data, data_split, "Comment", "Insult")
-    x_train, x_test, tokenizer = tokenize_input(train_input, test_input, vocab_size)
-    y_train, y_test, text_labels, num_classes = encode_labels(train_label, test_label)
+    train_input, test_input, train_label, test_label, x_train, x_test, y_train, y_test, tokenizer, text_labels, \
+    num_classes = init_data("newcsv.csv", vocab_size, .8)
 
     model = create_model(vocab_size, num_classes)
-    history = model.fit(x_train, y_train, epochs=10, batch_size=64, verbose=1)
+
+    model.fit(x_train, y_train, epochs=20, batch_size=64, verbose=1, class_weight={0: 1., 1: 30.})
 
     # Final evaluation of the model
     scores = model.evaluate(x_test, y_test, verbose=1)
@@ -140,11 +112,10 @@ def main():
     plot_confusion_matrix(cnf_matrix, classes=text_labels, title="Confusion matrix")
     plt.show()
 
-    while True:
-        console_input = input("Enter a message to judge: ")
-        input_tokenized = tokenizer.texts_to_matrix([console_input])
-        prediction = model.predict(input_tokenized)
-        print("Predicted label:", prediction)
+    # model.save('model-' + str(datetime.time()) + '.h5')
+    model.save("my_model.h5")  # creates a HDF5 file 'my_model.h5'
+
+    interactive_prompt(model, tokenizer)
 
 
 if __name__ == '__main__':
