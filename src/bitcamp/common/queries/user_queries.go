@@ -5,6 +5,7 @@ import(
 	"log"
 	"errors"
 	"bitcamp/common/models"
+	"fmt"
 )
 
 func CreateUser(name string, isParent bool) error {
@@ -141,4 +142,35 @@ func PairParentAndChild(p_id, c_id int) (error){
 	}
 
 	return nil
+}
+
+func GetParentsOfChildByName(id int) ([]models.User, error){
+
+	query := fmt.Sprintf("select id, name, isParent, fcm_id from user left outer join parent_child_relation_table pcrt on user.id = pcrt.p_id where pcrt.c_id=%v;", id)
+
+	log.Println(query)
+
+	db, err := GetDB()
+	if err != nil {
+		log.Println(err)
+		return nil, err
+	}
+
+	rows , err := db.Query(query)
+	if err != nil {
+		log.Println(err)
+		return nil, err
+	}
+
+	defer rows.Close()
+
+	log.Println("this is where it fails i bet")
+
+	scans, err  := models.ScanUsers(rows)
+	if err != nil {
+		log.Println(err)
+		return nil, err
+	}
+
+	return scans, nil
 }

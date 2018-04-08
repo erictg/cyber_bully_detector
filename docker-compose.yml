@@ -39,3 +39,9 @@ services:
     depends_on:
       - rabbitmq
       - db
+  ann:
+    build:
+      context: ann
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200"

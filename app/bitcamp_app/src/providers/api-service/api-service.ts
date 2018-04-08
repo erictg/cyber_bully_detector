@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Observable} from "rxjs/Observable";
+import {StorageServiceProvider} from "../storage-service/storage-service";
 
 /*
   Generated class for the ApiServiceProvider provider.
@@ -11,7 +12,7 @@ import {Observable} from "rxjs/Observable";
 @Injectable()
 export class ApiServiceProvider {
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient, private storageService:StorageServiceProvider) {
     console.log('Hello ApiServiceProvider Provider');
   }
 
@@ -59,6 +60,23 @@ export class ApiServiceProvider {
     };
 
     return this.http.post(this.baseUrl + "/rest/text", dto);
+  }
+
+  //Name	string `json:"name"`
+  // 	FCM		string `json:"fcm"`
+
+  updateFCM(id:string){
+    this.storageService.getUser().then(user => {
+      let dto = {
+        "name":user.name,
+        "fcm": id
+      };
+
+      this.http.put("/rest/user", dto).subscribe(result =>{
+        console.log(result);
+      })
+    })
+
   }
 
 }
