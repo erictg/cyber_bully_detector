@@ -8,6 +8,12 @@
   version = "v1.0"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/douglasmakey/go-fcm"
+  packages = ["."]
+  revision = "fc0ca9fae73f7ff5c2b1bdb3fc23a89b71d0008c"
+
+[[projects]]
   name = "github.com/gin-contrib/cors"
   packages = ["."]
   revision = "cf4846e6a636a76237a28d9286f163c132e841bc"
@@ -92,6 +98,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "bef140f490ecbca4b4b7e25e4f7e002c5062ac03f3a68cfde3718d0ca0f384af"
+  inputs-digest = "5c68dd6fbc24a79286bea48b933bc0899e3e5dcf7d28772f63a61683b5f90274"
   solver-name = "gps-cdcl"
   solver-version = 1
