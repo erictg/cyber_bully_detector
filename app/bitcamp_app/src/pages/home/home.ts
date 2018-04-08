@@ -20,7 +20,7 @@ export class HomePage {
   }
 
 
-  getSMS(){
+  interceptSMS(){
     if(SMS) SMS.listSMS({}, data=>{
       setTimeout(()=>{
         console.log(data);
@@ -29,6 +29,16 @@ export class HomePage {
     },err=>{
       console.log(err);
     });
+  }
+
+  displaySMS(){
+    this.messages.subscribe(note =>{
+      alert(note);
+      this.interceptSMS();
+      },
+      err => {
+        alert("I suck");
+      })
   }
 
   checkPermission()

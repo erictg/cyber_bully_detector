@@ -1,18 +1,17 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>SMS Display Page</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-list name="smsTranquilizer">
+  <ion-list name="dogDisplay">
     <ion-item *ngFor="let x of messages">
-      <ion-avatar item-start>
-        <button ion-button color="danger" round (click)="getSMS()">{{x.address}}</button>
-      </ion-avatar>
-      <h2>{{x.address}}</h2>
-
-      <p>{{x.body}}</p>
+      <button ion-button="dogDisplay" (click)="displaySMS()">DDD</button>
+      <ion-item-divider *ngIf="x.now>=Date.now()">
+        <h2>{{x.address}}</h2>
+        <p>{{x.body}}</p>
+      </ion-item-divider>
     </ion-item>
   </ion-list>
 </ion-content>
