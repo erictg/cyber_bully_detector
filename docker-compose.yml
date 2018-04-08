@@ -18,16 +18,15 @@ services:
     build:
       context: "src/bitcamp"
       dockerfile: "api.dockerfile"
-    ports:
-      - "8080:8080"
-    restart: always
-    environment:
-      DOCKER: 'true'
-      MYSQL_ROOT_PASSWORD: mypassword
-      MYSQL_USER: dbuser
-      MYSQL_PASSWORD: userpass
-      MYSQL_DATABASE: bully
-      MYSQL_HOST: db
+      environment:
+        MYSQL_HOST: 'db'
+        MYSQL_USER: 'dbuser'
+        MYSQL_PASSWORD: 'userpass'
+        DOCKER: 'true'
+      ports:
+         - "8080:8080"
+      depends_on:
+          - db
 
     depends_on:
       - rabbitmq
