@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {NavController, Platform} from 'ionic-angular';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
+import {SmsServiceProvider} from "../../providers/sms-service/sms-service";
 
 declare var SMS:any;
 
@@ -14,9 +15,10 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, public platform:Platform,
               public androidPermissions: AndroidPermissions,
-              ) {
+              private sms: SmsServiceProvider   ) {
 
   }
+
 
   getSMS(){
     if(SMS) SMS.listSMS({}, data=>{
