@@ -33,6 +33,7 @@ func main(){
 	r.GET("/rest/user/id/:id", rest.GetUserById)
 	r.GET("/rest/user/name/:name", rest.GetUserByName)
 	r.POST("/rest/pair", rest.UserPairPOST)
-
+	r.POST("rest/text/id/:id", rest.GetTextById)
+	r.POST("/rest/text/uid/:id", rest.GetAllTextsForUser)
 	r.Run(":8080")
 }
