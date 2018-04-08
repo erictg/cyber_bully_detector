@@ -6,7 +6,7 @@ import model_util
 app = Flask(__name__)
 
 
-@app.route("/classify", methods=['POST'])
+@app.route("/rest/classify", methods=['POST'])
 def classify():
     data = request.get_json()
     input_tokenized = tokenizer.texts_to_matrix([cleaner.clean_message(data['content'])])

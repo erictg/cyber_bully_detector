@@ -6,6 +6,8 @@ import (
 	"bitcamp/common/models/dto"
 	"encoding/json"
 	"bitcamp/common/queries"
+	"net/http"
+	"bytes"
 )
 
 func CreateWorkers(workers int) error{
@@ -72,7 +74,29 @@ func handler(textDTO dto.TextDTO){
 	}
 }
 
-func callPredictorAPI(dto dto.TextDTO) (float32, error){
-	//todo implement
-	return .1, nil
+func callPredictorAPI(to dto.TextDTO) (float32, error){
+	baseUrl := "http://ann:4200/rest/classify"
+
+	d := dto.NNReq{Content:to.Content}
+
+	jsonVal, _ := json.Marshal(d)
+
+	resp, err := http.Post(baseUrl, "application/json", bytes.NewBuffer(jsonVal))
+	if err != nil{
+		log.Println(err)
+		return -1, err
+	}
+
+	var response dto.NNResp
+	err = json.NewDecoder(resp.Body).Decode(&response)
+	if err != nil{
+		log.Println(err)
+		return -1, err
+	}
+
+	if response.Insult > response.NotInsult{
+		return response.Insult, nil
+	}else{
+		return 0, nil
+	}
 }
