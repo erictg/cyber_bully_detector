@@ -1,5 +1,6 @@
 import itertools
 
+import keras
 import matplotlib.pyplot as plt
 import numpy as np
 from keras.layers import Dense, Dropout, Activation
@@ -77,7 +78,10 @@ def main():
 
     model = create_model(vocab_size, num_classes)
 
-    model.fit(x_train, y_train, epochs=20, batch_size=64, verbose=1, class_weight={0: 1., 1: 30.})
+    callback = keras.callbacks.TensorBoard(log_dir='./Graph', histogram_freq=0, write_graph=True)
+    callback.set_model(model)
+
+    model.fit(x_train, y_train, epochs=20, batch_size=64, verbose=1, class_weight={0: 1., 1: 30.}, callbacks=[callback])
 
     # Final evaluation of the model
     scores = model.evaluate(x_test, y_test, verbose=1)
