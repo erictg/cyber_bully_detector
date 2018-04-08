@@ -20,4 +20,4 @@ def classify():
 if __name__ == '__main__':
     _, _, _, _, _, _, _, _, tokenizer, _, _ = model_util.init_data("newcsv.csv", 5000, .8)
     model = model_util.load_modelfile("single_big_dense_layer.h5")
-    app.run()
+    app.run(port=4200)
