@@ -2,9 +2,10 @@ from flask import Flask, request, jsonify
 import json
 import cleaner
 import model_util
+import nltk
 
 app = Flask(__name__)
-
+nltk.download('punkt')
 
 @app.route("/rest/classify", methods=['POST'])
 def classify():
