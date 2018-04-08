@@ -17,7 +17,7 @@ import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { ApiServiceProvider } from '../providers/api-service/api-service';
 import { IonicStorageModule } from '@ionic/storage';
 import { StorageServiceProvider } from '../providers/storage-service/storage-service';
-
+import { FCM } from '@ionic-native/fcm'
 @NgModule({
   declarations: [
     MyApp,
@@ -41,6 +41,7 @@ import { StorageServiceProvider } from '../providers/storage-service/storage-ser
     TabsPage
   ],
   providers: [
+    FCM,
     AndroidPermissions,
     StatusBar,
     SplashScreen,
