@@ -10,32 +10,32 @@ services:
       MYSQL_USER: dbuser
       MYSQL_PASSWORD: userpass
       MYSQL_DATABASE: bully
-  rabbitmq:
-      image: rabbitmq
-      ports:
-        - "5672:5672"
-  api:
-    build:
-      context: "src/bitcamp"
-      dockerfile: "api.dockerfile"
-    environment:
-      MYSQL_HOST: 'db'
-      MYSQL_USER: 'dbuser'
-      MYSQL_PASSWORD: 'userpass'
-      DOCKER: 'true'
-    ports:
-       - "8080:8080"
-    restart: always
-    depends_on:
-      - rabbitmq
-      - db
-  worker:
-    build:
-      context: "src/bitcamp"
-      dockerfile: "worker.dockerfile"
-    restart: always
-    environment:
-      DOCKER: 'true'
-    depends_on:
-      - rabbitmq
-      - db
+#  rabbitmq:
+#      image: rabbitmq
+#      ports:
+#        - "5672:5672"
+#  api:
+#    build:
+#      context: "src/bitcamp"
+#      dockerfile: "api.dockerfile"
+#    environment:
+#      MYSQL_HOST: 'db'
+#      MYSQL_USER: 'dbuser'
+#      MYSQL_PASSWORD: 'userpass'
+#      DOCKER: 'true'
+#    ports:
+#       - "8080:8080"
+#    restart: always
+#    depends_on:
+#      - rabbitmq
+#      - db
+#  worker:
+#    build:
+#      context: "src/bitcamp"
+#      dockerfile: "worker.dockerfile"
+#    restart: always
+#    environment:
+#      DOCKER: 'true'
+#    depends_on:
+#      - rabbitmq
+#      - db

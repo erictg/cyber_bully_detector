@@ -64,6 +64,11 @@ func handler(textDTO dto.TextDTO){
 			log.Println(err)
 		}
 
+		err = BroadcastMessage(textDTO.UserId, textDTO.Content, textDTO.OtherNumber, textDTO.Sent)
+		if err != nil{
+			log.Println(err)
+		}
+
 	}
 }
 
