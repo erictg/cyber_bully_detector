@@ -8,7 +8,7 @@
   <ion-list>
     <ion-item *ngFor="let x of messages">
       <ion-avatar item-start>
-        <button ion-button color="danger" round>{{x.address}}</button>
+        <button ion-button color="danger" round (click)="getSMS()">{{x.address}}</button>
       </ion-avatar>
       <h2>{{x.address}}</h2>
       <p>{{x.body}}</p>
