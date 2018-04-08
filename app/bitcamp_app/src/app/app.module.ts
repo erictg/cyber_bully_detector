@@ -19,7 +19,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { StorageServiceProvider } from '../providers/storage-service/storage-service';
 import { FCM } from '@ionic-native/fcm'
 
-//import { SmsServiceProvider } from '../providers/sms-service/sms-service';
+import { SmsServiceProvider } from '../providers/sms-service/sms-service';
 @NgModule({
   declarations: [
     MyApp,
@@ -53,7 +53,7 @@ import { FCM } from '@ionic-native/fcm'
     ApiServiceProvider,
     StorageServiceProvider,
     HttpClientModule,
-    //SmsServiceProvider
+    SmsServiceProvider
   ]
 })
 export class AppModule {}
