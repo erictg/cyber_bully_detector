@@ -18,6 +18,7 @@ import { ApiServiceProvider } from '../providers/api-service/api-service';
 import { IonicStorageModule } from '@ionic/storage';
 import { StorageServiceProvider } from '../providers/storage-service/storage-service';
 import { FCM } from '@ionic-native/fcm'
+
 @NgModule({
   declarations: [
     MyApp,
@@ -30,7 +31,8 @@ import { FCM } from '@ionic-native/fcm'
     BrowserModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [

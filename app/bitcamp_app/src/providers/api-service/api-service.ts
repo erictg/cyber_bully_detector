@@ -79,6 +79,13 @@ export class ApiServiceProvider {
 
   }
 
+  checkMean(meanStatement:string) : Observable<Result>{
+    let dto = {
+      "content":meanStatement
+    };
+    return this.http.post<Result>("http://35.196.78.183:4200/rest/classify", dto)
+  }
+
 }
 
 // Id 			int 	`json:"id"`
@@ -89,4 +96,9 @@ export class User{
   id:number;
   name:string;
   is_parent:string;
+}
+
+export class Result {
+  insult: string;
+  not_insult: string;
 }
