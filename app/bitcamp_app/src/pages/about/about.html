@@ -7,11 +7,23 @@
 </ion-header>
 
 <ion-content padding>
-  <button ion-button (click)="auth.logout()">Logout</button>
+  <ion-list>
+    <ion-item>
+      <button ion-button (click)="auth.logout()">Logout</button>
+    </ion-item>
+    <ion-item>
+      <ion-input  placeholder="statement" [(ngModel)]="checkVal"></ion-input>
+    </ion-item>
+    <ion-item>
+      <button ion-button (click)="check()">See how bad you are!</button>
+    </ion-item>
+    <ion-item>
+      <p>Insult {{toShow.insult| json}}</p>
+    </ion-item>
+    <ion-item>
+      <p>Not insult {{toShow.not_insult | json}}</p>
+    </ion-item>
+  </ion-list>
 
-  <ion-input  placeholder="statement" [(ngModel)]="checkVal"></ion-input>
-  <button ion-button (click)="check()">See how bad you are!</button>
 
-  <p>Insult : {{toShow.insult}}</p>
-  <p>Non-insult : {{toShow.not_insult}}</p>
 </ion-content>

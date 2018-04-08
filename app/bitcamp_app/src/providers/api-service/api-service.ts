@@ -99,6 +99,6 @@ export class User{
 }
 
 export class Result {
-  insult: string;
-  not_insult: string;
+  insult: number;
+  not_insult: number;
 }
