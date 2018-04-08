@@ -11,3 +11,7 @@ type PairDTO struct{
 
 }
 
+type FCMDto struct{
+	Name	string `json:"name"`
+	FCM		string `json:"fcm"`
+}

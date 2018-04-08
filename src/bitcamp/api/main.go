@@ -36,7 +36,7 @@ func main(){
 		MaxAge:           12 * time.Hour,
 	}))
 
-
+	r.PUT("/rest/user", rest.UpdateUserFCM)
 	r.POST("/rest/text", rest.TextPostWrap(SendBrokerService))
 	r.POST("/rest/user", rest.UserPOST)
 	r.GET("/rest/user/id/:id", rest.GetUserById)

@@ -32,6 +32,30 @@ func CreateUser(name string, isParent bool) error {
 	return nil
 }
 
+func UpdateUserFCM(username, fcmId string) error{
+	query := sq.Update("user").Set("fcm_id", fcmId).
+		Where(sq.Eq{"name": username})
+	db, err := GetDB()
+	if err != nil {
+		log.Println(err)
+		return err
+	}
+
+	result , err := query.RunWith(db).Exec()
+	if err != nil {
+		log.Println(err)
+		return err
+	}
+
+	if rows, err := result.RowsAffected(); err != nil || rows == 0{
+		log.Println(err)
+		log.Println(rows)
+		return errors.New("failed to insert")
+	}
+
+	return nil
+}
+
 func GetUserById(id int) (*models.User, error) {
 	query := sq.Select("*").From("user").Where(sq.Eq{"id": id})
 	db, err := GetDB()

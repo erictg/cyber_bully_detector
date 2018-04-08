@@ -71,4 +71,24 @@ func GetUserById(c *gin.Context){
 	c.JSON(200, user)
 }
 
+func UpdateUserFCM(c *gin.Context){
+	var fcmDto dto.FCMDto
+	err := json.NewDecoder(c.Request.Body).Decode(&fcmDto)
+
+	if err != nil{
+		log.Println(err)
+		c.AbortWithError(400, err)
+		return
+	}
+
+	err = queries.UpdateUserFCM(fcmDto.Name, fcmDto.FCM)
+	if err != nil{
+		log.Println(err)
+		c.AbortWithError(400, err)
+		return
+	}
+
+	c.Status(200)
+}
+
 

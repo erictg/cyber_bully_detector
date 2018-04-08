@@ -5,8 +5,10 @@ use bully;
 create table user(
   id int auto_increment primary key,
   name varchar(255) not null,
-  isParent bool default false
+  isParent bool default false,
+  fcm_id varchar(255)
 );
+
 
 create table parent_child_relation_table(
   p_id int,

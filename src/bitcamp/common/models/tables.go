@@ -4,6 +4,7 @@ type User struct{
 	Id 			int 	`json:"id"`
 	Name 		string 	`json:"name"`
 	IsParent 	bool 	`json:"is_parent"`
+	FCMId		string 	`json:"fcm_id"`
 }
 
 type FlaggedText struct{

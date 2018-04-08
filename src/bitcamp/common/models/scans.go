@@ -10,6 +10,7 @@ func ScanUser(r *sql.Row) (User, error) {
 		&s.Id,
 		&s.Name,
 		&s.IsParent,
+		&s.FCMId,
 	); err != nil {
 		return User{}, err
 	}
@@ -25,6 +26,7 @@ func ScanUsers(rs *sql.Rows) ([]User, error) {
 			&s.Id,
 			&s.Name,
 			&s.IsParent,
+			&s.FCMId,
 		); err != nil {
 			return nil, err
 		}
